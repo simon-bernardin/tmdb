@@ -1,4 +1,4 @@
-package com.mobiapps.courses.tmdb.pages
+package com.mobiapps.courses.tmdb.entities
 
 import com.mobiapps.courses.tmdb.entities.CastMember
 
@@ -9,5 +9,6 @@ data class Movie(
     var averageVote: Float = 0f,
     var votesNumber: Int = 0,
     var overview: String? = null,
-    var cast: List<CastMember> = emptyList()
+    var cast: List<CastMember> = emptyList(),
+    var releaseDate: String? = null
 )
