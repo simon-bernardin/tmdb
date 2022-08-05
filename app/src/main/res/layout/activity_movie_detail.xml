@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.MovieDetailActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/poster"
+        tools:text="Movie title" />
+
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/overview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vote"
+        tools:text="Overview" />
+
+    <TextView
+        android:id="@+id/cast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overview"
+        tools:text="Cast" />
+
+    <TextView
+        android:id="@+id/vote"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="7.0 (365)" />
+</androidx.constraintlayout.widget.ConstraintLayout>
