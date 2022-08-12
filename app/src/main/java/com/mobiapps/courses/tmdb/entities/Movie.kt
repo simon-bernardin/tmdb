@@ -5,6 +5,7 @@ import java.time.LocalDate
 data class Movie(
     var id: Int = -1,
     var posterUrl: String? = null,
+    var backdropUrl: String? = null,
     var title: String? = null,
     var averageVote: Float = 0f,
     var votesNumber: Int = 0,

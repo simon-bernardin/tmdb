@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.mobiapps.courses.tmdb.R
 import com.mobiapps.courses.tmdb.entities.Movie
+import android.util.Log
 
 class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
     RecyclerView.Adapter<MoviesListAdapter.ViewHolder>() {
@@ -20,11 +23,13 @@ class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
         }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val poster: ImageView
         val title: TextView
         val releaseDate: TextView
 
         init {
             with(view) {
+                poster = findViewById(R.id.backdrop)
                 title = findViewById(R.id.title)
                 releaseDate = findViewById(R.id.releaseDate)
                 setOnClickListener {
@@ -42,6 +47,8 @@ class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+//        Log.d("MoviesListAdapter", dataSet[position].posterUrl!!)
+        holder.poster.load("https://image.tmdb.org/t/p/original/${dataSet[position].posterUrl}")
         holder.title.text = dataSet[position].title
         holder.releaseDate.text = dataSet[position].releaseDate.toString()
     }

@@ -22,7 +22,7 @@ object ApiClient {
         OkHttpClient.Builder()
             .addInterceptor(Interceptor {
                 val original: Request = it.request()
-                val originalHttpUrl = original.url()
+                val originalHttpUrl = original.url
 
                 val url = originalHttpUrl.newBuilder()
                     .addQueryParameter("api_key", "48d02d2803f669be5643367e3307dd43")

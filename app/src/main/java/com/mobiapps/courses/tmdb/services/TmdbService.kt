@@ -14,8 +14,12 @@ class TmdbService(private val mock: Boolean = false) {
     fun getMovieDetail(id: Int, success: (movie: Movie?) -> Unit, failure: () -> Unit) {
         if (mock)
             success(mockDataSource.movies.find { it.id == id })
-//        else
-//            networkDataSource.
+        else
+            networkDataSource.getMovieById(id, success = {
+                success(it)
+            }, failure = {
+                failure()
+            })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
