@@ -1,6 +1,6 @@
 package com.mobiapps.courses.tmdb.entities
 
-import com.mobiapps.courses.tmdb.entities.CastMember
+import java.time.LocalDate
 
 data class Movie(
     var id: Int = -1,
@@ -10,5 +10,5 @@ data class Movie(
     var votesNumber: Int = 0,
     var overview: String? = null,
     var cast: List<CastMember> = emptyList(),
-    var releaseDate: String? = null
+    var releaseDate: LocalDate? = null
 )

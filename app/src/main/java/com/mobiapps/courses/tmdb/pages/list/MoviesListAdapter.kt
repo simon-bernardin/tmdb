@@ -35,7 +35,7 @@ class MoviesListAdapter(private val dataSet: List<Movie>, private val onClick: (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = dataSet[position].title
-        holder.releaseDate.text = dataSet[position].releaseDate
+        holder.releaseDate.text = dataSet[position].releaseDate.toString()
     }
 
     override fun getItemCount(): Int =
