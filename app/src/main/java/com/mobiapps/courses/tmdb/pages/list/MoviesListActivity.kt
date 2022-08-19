@@ -35,7 +35,6 @@ class MoviesListActivity : AppCompatActivity() {
             navigateToDetail(it)
         }
 
-
 //        val divider: ItemDecoration = object : ItemDecoration() {
 //            override fun getItemOffsets(
 //                outRect: Rect,
