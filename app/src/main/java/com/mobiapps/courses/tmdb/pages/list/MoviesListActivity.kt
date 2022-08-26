@@ -24,18 +24,22 @@ class MoviesListActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        val moviesList = findViewById<RecyclerView>(R.id.moviesList)
+
         val moviesListAdapter = MoviesListAdapter() {
             navigateToDetail(it)
         }
 
-        tmdbService.getLatestMovies(success = {
-            moviesListAdapter.dataSet = it
-        }, failure = {})
-
-        val moviesList = findViewById<RecyclerView>(R.id.moviesList)
-
         moviesList.adapter = moviesListAdapter
         moviesList.layoutManager = LinearLayoutManager(this)
+
+        tmdbService.getLatestMovies(success = {
+            runOnUiThread {
+                moviesListAdapter.dataSet = it
+            }
+        }, failure = {})
+
+
     }
 
     private fun navigateToDetail(movie: Movie) {

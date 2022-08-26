@@ -15,8 +15,8 @@ class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
     var dataSet: List<Movie> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
-            notifyDataSetChanged()
             field = value
+            notifyDataSetChanged()
         }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -48,4 +48,5 @@ class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
 
     override fun getItemCount(): Int =
         dataSet.size
+
 }
