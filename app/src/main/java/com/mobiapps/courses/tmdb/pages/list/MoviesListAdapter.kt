@@ -1,5 +1,6 @@
 package com.mobiapps.courses.tmdb.pages.list
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mobiapps.courses.tmdb.R
 import com.mobiapps.courses.tmdb.entities.Movie
 
-class MoviesListAdapter(private val dataSet: List<Movie>, private val onClick: (Movie) -> Unit) :
+class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
     RecyclerView.Adapter<MoviesListAdapter.ViewHolder>() {
+
+    var dataSet: List<Movie> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            notifyDataSetChanged()
+            field = value
+        }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView
@@ -40,5 +48,4 @@ class MoviesListAdapter(private val dataSet: List<Movie>, private val onClick: (
 
     override fun getItemCount(): Int =
         dataSet.size
-
 }
