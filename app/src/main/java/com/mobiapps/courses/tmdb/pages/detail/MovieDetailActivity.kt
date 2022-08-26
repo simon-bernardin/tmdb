@@ -35,7 +35,9 @@ class MovieDetailActivity : AppCompatActivity() {
                     it.votesNumber.toString()
                 )
                 findViewById<TextView>(R.id.overview).text = it.overview
-                findViewById<TextView>(R.id.cast).text = it.cast.map { it.name }.joinToString(" - ")
+                findViewById<TextView>(R.id.cast).text = it.cast.map { cast ->
+                    cast.name
+                }.joinToString(" - ")
             }
         }, failure = {
 
