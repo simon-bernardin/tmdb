@@ -1,13 +1,10 @@
 package com.mobiapps.courses.tmdb.entities.transformers
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.mobiapps.courses.tmdb.datasources.dtos.LatestMoviesDto
 import com.mobiapps.courses.tmdb.datasources.dtos.MovieDto
 import com.mobiapps.courses.tmdb.entities.Movie
 import java.time.LocalDate
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun latestMoviesDtoToMoviesList(latestMoviesDto: LatestMoviesDto): List<Movie> {
     val movies = latestMoviesDto.results.map {
         Movie(
@@ -34,6 +31,6 @@ fun movieDtoFromMovie(movieDto: MovieDto): Movie {
         averageVote = movieDto.vote_average,
         votesNumber = movieDto.vote_count,
         overview = movieDto.overview,
-        releaseDate = movieDto.release_date,
+        releaseDate = LocalDate.parse(movieDto.release_date),
     )
 }

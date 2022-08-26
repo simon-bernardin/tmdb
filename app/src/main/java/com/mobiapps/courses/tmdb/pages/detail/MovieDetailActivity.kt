@@ -1,15 +1,11 @@
 package com.mobiapps.courses.tmdb.pages.detail
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
-import androidx.annotation.RequiresApi
 import com.mobiapps.courses.tmdb.R
-import com.mobiapps.courses.tmdb.entities.Movie
 import com.mobiapps.courses.tmdb.services.TmdbService
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -25,7 +21,6 @@ class MovieDetailActivity : AppCompatActivity() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
 

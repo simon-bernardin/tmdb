@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.mobiapps.courses.tmdb.R
 import com.mobiapps.courses.tmdb.entities.Movie
-import android.util.Log
 
 class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
     RecyclerView.Adapter<MoviesListAdapter.ViewHolder>() {
@@ -47,7 +46,6 @@ class MoviesListAdapter(private val onClick: (Movie) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        Log.d("MoviesListAdapter", dataSet[position].posterUrl!!)
         holder.poster.load("https://image.tmdb.org/t/p/original/${dataSet[position].posterUrl}")
         holder.title.text = dataSet[position].title
         holder.releaseDate.text = dataSet[position].releaseDate.toString()
