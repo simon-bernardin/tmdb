@@ -1,5 +1,8 @@
 package com.mobiapps.courses.tmdb.entities
 
+import androidx.room.Entity
+
+@Entity
 data class CastMember(
-    var name: String? = null
+    val name: String? = null
 )

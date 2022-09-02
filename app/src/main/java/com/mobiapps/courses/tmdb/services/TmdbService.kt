@@ -1,23 +1,41 @@
 package com.mobiapps.courses.tmdb.services
 
-import com.mobiapps.courses.tmdb.datasources.MockDataSource
-import com.mobiapps.courses.tmdb.datasources.NetworkDataSource
+import android.content.Context
+import androidx.room.Room
+import com.mobiapps.courses.tmdb.datasources.locale.AppDatabase
+import com.mobiapps.courses.tmdb.datasources.locale.MovieDao
+import com.mobiapps.courses.tmdb.datasources.remote.MockDataSource
+import com.mobiapps.courses.tmdb.datasources.remote.NetworkDataSource
 import com.mobiapps.courses.tmdb.entities.Movie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TmdbService(private val mock: Boolean = false) {
+class TmdbService(context: Context, private val mock: Boolean = false) {
     private val mockDataSource = MockDataSource()
     private val networkDataSource = NetworkDataSource()
+    private val movieDao: MovieDao
+
+    init {
+        val db = Room.databaseBuilder(
+            context,
+            AppDatabase::class.java, "my-database"
+        ).build()
+
+        movieDao = db.movieDao()
+    }
 
     fun getMovieDetail(id: Int, success: (movie: Movie?) -> Unit, failure: () -> Unit) {
         if (mock)
             success(mockDataSource.movies.find { it.id == id })
         else
             CoroutineScope(Dispatchers.IO).launch {
-                networkDataSource.getMovieById(id, success = {
-                    success(it)
+                networkDataSource.getMovieById(id, success = { movie ->
+                    val movieDb = movieDao.getById(id)
+                    movieDb?.let {
+                        movie.favorite = true
+                    }
+                    success(movie)
                 }, failure = {
                     failure()
                 })
@@ -29,12 +47,25 @@ class TmdbService(private val mock: Boolean = false) {
             success(mockDataSource.movies)
         else {
             CoroutineScope(Dispatchers.IO).launch {
-                networkDataSource.getLatestMovies(success = {
-                    success(it)
+                networkDataSource.getLatestMovies(success = { movies ->
+                    val moviesDb = movieDao.getAll()
+                    movies.map { movie ->
+                        movie.favorite = moviesDb.any { it.id == movie.id }
+                    }
+                    success(movies)
                 }, failure = {
                     failure()
                 })
             }
+        }
+    }
+
+    fun toggleFavorite(movie: Movie, favorite: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (favorite)
+                movieDao.addFavorite(movie)
+            else
+                movieDao.removeFavorite(movie)
         }
     }
 }

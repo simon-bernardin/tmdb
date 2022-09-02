@@ -9,7 +9,7 @@ import com.mobiapps.courses.tmdb.R
 import com.mobiapps.courses.tmdb.services.TmdbService
 
 class MovieDetailActivity : AppCompatActivity() {
-    private val tmdbService: TmdbService = TmdbService()
+    private lateinit var tmdbService: TmdbService
 
     companion object {
         const val INTENT_PARAM_ID = "intent_param_id"
@@ -18,7 +18,7 @@ class MovieDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
-
+        tmdbService = TmdbService(applicationContext)
     }
 
     override fun onStart() {

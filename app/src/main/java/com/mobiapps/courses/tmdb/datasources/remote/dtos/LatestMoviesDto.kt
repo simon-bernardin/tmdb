@@ -1,4 +1,4 @@
-package com.mobiapps.courses.tmdb.datasources.dtos
+package com.mobiapps.courses.tmdb.datasources.remote.dtos
 
 data class LatestMoviesDto(
     val page: Int,

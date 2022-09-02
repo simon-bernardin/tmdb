@@ -1,4 +1,4 @@
-package com.mobiapps.courses.tmdb.datasources
+package com.mobiapps.courses.tmdb.datasources.remote
 
 import com.mobiapps.courses.tmdb.entities.CastMember
 import com.mobiapps.courses.tmdb.entities.Movie

@@ -11,11 +11,13 @@ import com.mobiapps.courses.tmdb.pages.detail.MovieDetailActivity
 import com.mobiapps.courses.tmdb.services.TmdbService
 
 class MoviesListActivity : AppCompatActivity() {
-    private val tmdbService: TmdbService = TmdbService()
+    private lateinit var tmdbService: TmdbService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies_list)
+        tmdbService = TmdbService(applicationContext)
     }
 
     override fun onStart() {
@@ -23,9 +25,11 @@ class MoviesListActivity : AppCompatActivity() {
 
         val moviesList = findViewById<RecyclerView>(R.id.moviesList)
 
-        val moviesListAdapter = MoviesListAdapter() {
+        val moviesListAdapter = MoviesListAdapter ({
             navigateToDetail(it)
-        }
+        }, { movie, favorite ->
+            tmdbService.toggleFavorite(movie, favorite)
+        })
 
         moviesList.adapter = moviesListAdapter
         moviesList.layoutManager = GridLayoutManager(this, 3)

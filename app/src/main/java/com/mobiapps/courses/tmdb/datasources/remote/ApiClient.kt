@@ -1,4 +1,4 @@
-package com.mobiapps.courses.tmdb.datasources
+package com.mobiapps.courses.tmdb.datasources.remote
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

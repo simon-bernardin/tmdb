@@ -1,4 +1,4 @@
-package com.mobiapps.courses.tmdb.datasources
+package com.mobiapps.courses.tmdb.datasources.remote
 
 import android.util.Log
 import androidx.annotation.WorkerThread

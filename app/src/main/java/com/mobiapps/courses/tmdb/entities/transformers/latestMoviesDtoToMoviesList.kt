@@ -1,7 +1,7 @@
 package com.mobiapps.courses.tmdb.entities.transformers
 
-import com.mobiapps.courses.tmdb.datasources.dtos.LatestMoviesDto
-import com.mobiapps.courses.tmdb.datasources.dtos.MovieDto
+import com.mobiapps.courses.tmdb.datasources.remote.dtos.LatestMoviesDto
+import com.mobiapps.courses.tmdb.datasources.remote.dtos.MovieDto
 import com.mobiapps.courses.tmdb.entities.Movie
 import java.time.LocalDate
 

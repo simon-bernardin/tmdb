@@ -1,7 +1,7 @@
-package com.mobiapps.courses.tmdb.datasources
+package com.mobiapps.courses.tmdb.datasources.remote
 
-import com.mobiapps.courses.tmdb.datasources.dtos.LatestMoviesDto
-import com.mobiapps.courses.tmdb.datasources.dtos.MovieDto
+import com.mobiapps.courses.tmdb.datasources.remote.dtos.LatestMoviesDto
+import com.mobiapps.courses.tmdb.datasources.remote.dtos.MovieDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
