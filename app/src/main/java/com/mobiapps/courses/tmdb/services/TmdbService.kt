@@ -60,6 +60,24 @@ class TmdbService(context: Context, private val mock: Boolean = false) {
         }
     }
 
+    fun getMoviesByName(name: String, success: (movies: List<Movie>) -> Unit, failure: () -> Unit) {
+        if (mock)
+            success(mockDataSource.movies)
+        else {
+            CoroutineScope(Dispatchers.IO).launch {
+                networkDataSource.getMoviesByName(name, success = { movies ->
+                    val moviesDb = movieDao.getAll()
+                    movies.map { movie ->
+                        movie.favorite = moviesDb.any { it.id == movie.id }
+                    }
+                    success(movies)
+                }, failure = {
+                    failure()
+                })
+            }
+        }
+    }
+
     fun toggleFavorite(movie: Movie, favorite: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             if (favorite)

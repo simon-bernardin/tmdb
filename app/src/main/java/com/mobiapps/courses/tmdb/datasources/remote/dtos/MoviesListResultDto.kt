@@ -1,6 +1,6 @@
 package com.mobiapps.courses.tmdb.datasources.remote.dtos
 
-data class LatestMoviesResultDto(
+data class MoviesListResultDto(
     val poster_path: String,
     val adult: Boolean,
     val overview: String,

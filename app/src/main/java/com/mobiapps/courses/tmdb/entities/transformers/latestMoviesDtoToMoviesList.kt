@@ -1,11 +1,11 @@
 package com.mobiapps.courses.tmdb.entities.transformers
 
-import com.mobiapps.courses.tmdb.datasources.remote.dtos.LatestMoviesDto
+import com.mobiapps.courses.tmdb.datasources.remote.dtos.MoviesListDto
 import com.mobiapps.courses.tmdb.datasources.remote.dtos.MovieDto
 import com.mobiapps.courses.tmdb.entities.Movie
 import java.time.LocalDate
 
-fun latestMoviesDtoToMoviesList(latestMoviesDto: LatestMoviesDto): List<Movie> {
+fun moviesListDtoToMoviesList(latestMoviesDto: MoviesListDto): List<Movie> {
     val movies = latestMoviesDto.results.map {
         Movie(
             id = it.id,

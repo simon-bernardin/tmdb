@@ -1,8 +1,8 @@
 package com.mobiapps.courses.tmdb.datasources.remote.dtos
 
-data class LatestMoviesDto(
+data class MoviesListDto(
     val page: Int,
-    val results: List<LatestMoviesResultDto>,
+    val results: List<MoviesListResultDto>,
     val total_pages: Int,
     val total_results: Int
 )
