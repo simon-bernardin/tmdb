@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -18,22 +19,26 @@ object ApiClient {
         GsonBuilder().setLenient().create()
     }
 
+    class ApiKeyInterceptor : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val original: Request = chain.request()
+            val originalHttpUrl = original.url
+
+            val url = originalHttpUrl.newBuilder()
+                .addQueryParameter("api_key", "48d02d2803f669be5643367e3307dd43")
+                .build()
+
+            val requestBuilder: Request.Builder = original.newBuilder()
+                .url(url)
+
+            val request = requestBuilder.build()
+            return chain.proceed(request)
+        }
+    }
+
     private val httpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
-            .addInterceptor(Interceptor {
-                val original: Request = it.request()
-                val originalHttpUrl = original.url
-
-                val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("api_key", "48d02d2803f669be5643367e3307dd43")
-                    .build()
-
-                val requestBuilder: Request.Builder = original.newBuilder()
-                    .url(url)
-
-                val request = requestBuilder.build()
-                return@Interceptor it.proceed(request)
-            })
+            .addInterceptor(ApiKeyInterceptor())
             .build()
     }
 

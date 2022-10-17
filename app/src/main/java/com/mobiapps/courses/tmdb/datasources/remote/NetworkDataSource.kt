@@ -10,7 +10,7 @@ class NetworkDataSource {
     @WorkerThread
     suspend fun getLatestMovies(success: (movies: List<Movie>) -> Unit, failure: () -> Unit) {
         try {
-            val response = ApiClient.tmdbService.getLatestMovies()
+            val response = ApiClient.tmdbService.getLatestMovies().execute()
 
             if (response.isSuccessful && response.body() != null) {
                 val content = response.body()
@@ -28,7 +28,7 @@ class NetworkDataSource {
     @WorkerThread
     suspend fun getMoviesByName(name: String, success: (movies: List<Movie>) -> Unit, failure: () -> Unit) {
         try {
-            val response = ApiClient.tmdbService.getMovieByName(name)
+            val response = ApiClient.tmdbService.getMovieByName(name).execute()
 
             if (response.isSuccessful && response.body() != null) {
                 val content = response.body()
@@ -46,7 +46,7 @@ class NetworkDataSource {
     @WorkerThread
     suspend fun getMovieById(id: Int, success: (movie: Movie) -> Unit, failure: () -> Unit) {
         try {
-            val response = ApiClient.tmdbService.getMovieById(id)
+            val response = ApiClient.tmdbService.getMovieById(id).execute()
 
             if (response.isSuccessful && response.body() != null) {
                 val content = response.body()

@@ -14,35 +14,43 @@ import com.mobiapps.courses.tmdb.entities.Movie
 import com.mobiapps.courses.tmdb.pages.detail.MovieDetailActivity
 import com.mobiapps.courses.tmdb.services.TmdbService
 
+
 class MoviesListActivity : AppCompatActivity() {
     private lateinit var tmdbService: TmdbService
-
+    private lateinit var moviesListAdapter: MoviesListAdapter
+    private var moviesList: List<Movie>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies_list)
         tmdbService = TmdbService(applicationContext)
+
+        moviesList = savedInstanceState?.getParcelableArrayList("MOVIES_LIST")
     }
 
     override fun onStart() {
         super.onStart()
 
-        val moviesList = findViewById<RecyclerView>(R.id.moviesList)
+        val moviesListView = findViewById<RecyclerView>(R.id.moviesList)
 
-        val moviesListAdapter = MoviesListAdapter ({
+        moviesListAdapter = MoviesListAdapter({
             navigateToDetail(it)
         }, { movie, favorite ->
             tmdbService.toggleFavorite(movie, favorite)
         })
 
-        moviesList.adapter = moviesListAdapter
-        moviesList.layoutManager = GridLayoutManager(this, 3)
+        moviesListView.adapter = moviesListAdapter
+        moviesListView.layoutManager = GridLayoutManager(this, 3)
 
-        tmdbService.getLatestMovies(success = {
-            runOnUiThread {
-                moviesListAdapter.dataSet = it
-            }
-        }, failure = {})
+        if (moviesList == null) {
+            tmdbService.getLatestMovies(success = {
+                runOnUiThread {
+                    moviesListAdapter.dataSet = it
+                }
+            }, failure = {})
+        } else {
+            moviesListAdapter.dataSet = moviesList as List<Movie>
+        }
 
         val searchMovie = findViewById<EditText>(R.id.searchMovie)
         searchMovie.addTextChangedListener(object : TextWatcher {
@@ -56,14 +64,23 @@ class MoviesListActivity : AppCompatActivity() {
                 }, failure = {})
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
             }
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList("MOVIES_LIST", ArrayList(moviesListAdapter.dataSet))
+        super.onSaveInstanceState(outState)
     }
 
     private fun navigateToDetail(movie: Movie) {
