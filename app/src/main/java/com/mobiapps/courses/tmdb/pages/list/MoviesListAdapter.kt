@@ -1,6 +1,7 @@
 package com.mobiapps.courses.tmdb.pages.list
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.mobiapps.courses.tmdb.R
 import com.mobiapps.courses.tmdb.entities.Movie
-import android.util.Log
 
-class MoviesListAdapter(private val onClick: (Movie) -> Unit, private val onFavoriteToggle: (Movie, Boolean) -> Unit) :
+class MoviesListAdapter(
+    private val onClick: (Movie) -> Unit,
+    private val onFavoriteToggle: (Movie, Boolean) -> Unit
+) :
     RecyclerView.Adapter<MoviesListAdapter.ViewHolder>() {
 
     var dataSet: List<Movie> = emptyList()
