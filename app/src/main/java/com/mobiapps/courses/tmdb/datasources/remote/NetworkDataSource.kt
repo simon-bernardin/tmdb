@@ -10,7 +10,7 @@ class NetworkDataSource {
     @WorkerThread
     suspend fun getLatestMovies(success: (movies: List<Movie>) -> Unit, failure: () -> Unit) {
         try {
-            val response = ApiClient.tmdbService.getLatestMovies().execute()
+            val response = ApiClient.tmdbService.getLatestMovies()
 
             if (response.isSuccessful && response.body() != null) {
                 val content = response.body()
