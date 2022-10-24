@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TMDB</string>
     <string name="votes">%1$s (%2$s)</string>
+    <string name="movie_search_hint">Name a movie to search</string>
 </resources>
