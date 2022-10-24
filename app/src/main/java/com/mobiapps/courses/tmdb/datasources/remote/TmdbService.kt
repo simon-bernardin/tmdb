@@ -13,8 +13,8 @@ interface TmdbService {
     suspend fun getLatestMovies(): Response<MoviesListDto>
 
     @GET("movie/{id}")
-    suspend fun getMovieById(@Path("id") id: Int): Call<MovieDto>
+    suspend fun getMovieById(@Path("id") id: Int): Response<MovieDto>
 
     @GET("search/movie")
-    suspend fun getMovieByName(@Query("query") query: String): Call<MoviesListDto>
+    suspend fun getMovieByName(@Query("query") query: String): Response<MoviesListDto>
 }
