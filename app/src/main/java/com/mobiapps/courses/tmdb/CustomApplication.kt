@@ -1,16 +1,23 @@
 package com.mobiapps.courses.tmdb
 
 import android.app.Application
+import androidx.room.Room
+import com.mobiapps.courses.tmdb.datasources.locale.AppDatabase
 
-class CustomApplication: Application() {
+class CustomApplication : Application() {
+
+    private lateinit var database: AppDatabase
 
     override fun onCreate() {
         super.onCreate()
-        // do something
+
+        database = Room.databaseBuilder(
+            this,
+            AppDatabase::class.java,
+            "my-database",
+        ).build()
     }
 
-    fun doSomethingCrazy() {
-
-    }
+    fun getDb(): AppDatabase = database
 
 }

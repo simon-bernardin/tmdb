@@ -1,8 +1,7 @@
 package com.mobiapps.courses.tmdb.services
 
 import android.content.Context
-import androidx.room.Room
-import com.mobiapps.courses.tmdb.datasources.locale.AppDatabase
+import com.mobiapps.courses.tmdb.CustomApplication
 import com.mobiapps.courses.tmdb.datasources.locale.MovieDao
 import com.mobiapps.courses.tmdb.datasources.remote.MockDataSource
 import com.mobiapps.courses.tmdb.datasources.remote.NetworkDataSource
@@ -17,10 +16,7 @@ class TmdbService(context: Context, private val mock: Boolean = false) {
     private val movieDao: MovieDao
 
     init {
-        val db = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java, "my-database"
-        ).build()
+        val db = (context.applicationContext as CustomApplication).getDb()
 
         movieDao = db.movieDao()
     }
